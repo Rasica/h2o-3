@@ -21,6 +21,14 @@ class BuildConfig {
   private static final String HADOOP_IMAGE_NAME_PREFIX = 'h2o-3-hadoop'
   private static final String HADOOP_IMAGE_VERSION_TAG = '46'
 
+  private static final String XGB_IMAGE_VERSION_TAG = 'latest'
+  private static final Map SUPPORTED_XGB_ENVIRONMENTS = [
+    'centos6.5': [
+      [name: 'CentOS 6.5 Minimal', dockerfile: 'xgb/centos/Dockerfile-centos6.5-minimal', targetName: 'minimal'],
+      [name: 'CentOS 6.5 OMP', dockerfile: 'xgb/centos/Dockerfile-centos6.5-omp', targetName: 'omp'],
+    ]
+  ]
+
   public static final String COMPONENT_PY = 'py'
   public static final String COMPONENT_R = 'r'
   public static final String COMPONENT_JS = 'js'
@@ -132,6 +140,13 @@ class BuildConfig {
     return HADOOP_IMAGE_VERSION_TAG
   }
 
+  String getXGBImageVersion() {
+    return XGB_IMAGE_VERSION_TAG
+  }
+
+  Map getSupportedXGBEnvironments() {
+    return SUPPORTED_XGB_ENVIRONMENTS
+  }
   private void detectChanges(List<String> changes) {
     markAllComponentsForSkip()
 
